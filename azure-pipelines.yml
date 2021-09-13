@@ -1,0 +1,33 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+variables:
+  ARM_PASS: $(adminPass)
+
+trigger:
+- none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'quickstarts/microsoft.web/webapp-linux-managed-mysql/'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - task: AzureResourceManagerTemplateDeployment@3
+      inputs:
+        deploymentScope: 'Resource Group'
+        azureResourceManagerConnection: 'Visual Studio Enterprise Subscription – MPN(016d7106-54f2-483c-8087-307813d14cc1)'
+        subscriptionId: '016d7106-54f2-483c-8087-307813d14cc1'
+        action: 'Create Or Update Resource Group'
+        resourceGroupName: 'PRJNEWVM-MYTFRG'
+        location: 'Australia East'
+        templateLocation: 'URL of the file'
+        csmFileLink: 'https://github.com/abubakrquddusi/Azure_Terrafrom.git'
+        overrideParameters: '-projectName [Azure_Experiments]'
+        deploymentMode: 'Incremental'
+        deploymentName: 'DeployPipelineTemplate'
