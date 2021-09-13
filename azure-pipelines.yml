@@ -27,7 +27,7 @@ steps:
         resourceGroupName: 'PRJNEWVM-MYTFRG'
         location: 'Australia East'
         templateLocation: 'URL of the file'
-        csmFileLink: 'https://github.com/abubakrquddusi/AzureQuickStart.git'
+        csmFileLink: 'https://github.com/abubakrquddusi/Azure_Terrafrom.git'
         overrideParameters: '-projectName [Azure_Experiments]'
         deploymentMode: 'Incremental'
         deploymentName: 'DeployPipelineTemplate'
